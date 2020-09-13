@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'com.adarshr.test-logger' version '2.1.0'
+}
+
+libsDirName = "../"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class' : 'Main'
+    }
+    baseName 'calc'
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
